@@ -4,22 +4,43 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 
 interface LoginForm {
-  username: string;
+  email: string;
   password: string;
 }
 
 const Login: React.FC = () => {
-  const [form, setForm] = useState<LoginForm>({ username: '', password: '' });
+  const [form, setForm] = useState<LoginForm>({ email: '', password: '' });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log('Login enviado:', form);
-    //requisição para API Spring
+
+    try {
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (response.ok) {
+        const data = await response.text(); 
+        console.log('Resposta do backend:', data);
+        alert('Login feito com sucesso!');
+      } else {
+        const errorMsg = await response.text();
+        alert('Login falhou: ' + errorMsg);
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      alert('Erro ao conectar com o servidor');
+    }
   };
 
   return (
@@ -31,10 +52,10 @@ const Login: React.FC = () => {
           <input
             className="form-control"
             type="text"
-            id="username"
-            name="username"
-            placeholder="Registro administrativo"
-            value={form.username}
+            id="email"
+            name="email"
+            placeholder="Seu e-mail"
+            value={form.email}
             onChange={handleChange}
             required
           />
