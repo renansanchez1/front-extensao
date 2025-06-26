@@ -1,39 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+  font-family: 'Poppins', sans-serif;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
   padding: 2rem;
   background-color: #ffffff;
+  min-height: 100vh;
+  position: relative;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 600px;
+  margin-top: -40px; 
+  padding-top: 80px;
 }
 
 .logo {
-  width: 80px;
-  height: 80px;
-  background-color: #007bff;
-  border-radius: 1rem;
+  width: 100px;
+  height: 100px;
+  background-color: #007bc1;
+  border-radius: 1.25rem;
   margin-bottom: 1.5rem;
 }
 
 .title {
-  margin-bottom: 2rem;
-  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #003366;
   text-align: center;
 }
 
-.formContainer {
-  width: 100%;
-  max-width: 400px;
-}
-
 .footerLine {
-  margin-top: 4rem;
-  width: 100%;
+  margin-top: 10rem;
+  width: 70%;
   height: 2px;
-  background-color: #007bff;
+  background-color: #007bc1;
 }
 
 .footerImage {
@@ -47,23 +55,31 @@
 }
 
 .formGroup {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .formGroup label {
-  font-size: 0.9rem;
-  margin-bottom: 0.25rem;
+  width: 40%;
+  font-size: 0.85rem;
   color: #333;
+  margin: 0;
+  text-align: right;
+  padding-right: 1rem;
+  line-height: 1;
+  padding-top: 4px;
 }
 
 .input {
+  width: 45%;
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.95rem;
   border: 1px solid #007bff;
   border-radius: 0.25rem;
   outline: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 .input:focus {
@@ -72,9 +88,9 @@
 }
 
 .button {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  font-size: 1rem;
+  align-self: center;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.85rem;
   background-color: #28a745;
   border: none;
   color: white;
@@ -86,4 +102,26 @@
 
 .button:hover {
   background-color: #218838;
+}
+
+@media (max-width: 600px) {
+  .formGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .formGroup label {
+    width: 100%;
+    text-align: left;
+    padding-right: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
 }

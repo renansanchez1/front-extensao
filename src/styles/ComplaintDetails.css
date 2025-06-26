@@ -112,3 +112,183 @@ textarea {
   font-weight: bold;
   color: #007bc1;
 }
+
+
+.complaint-nav {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.complaint-main {
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.complaint-grid {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-section label {
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  font-size: 14px;
+}
+
+.input-multiline {
+  height: 60px;
+  font-family: inherit;
+  white-space: pre-line;
+}
+
+.footer-logo {
+  margin-top: 10px;
+  background-image: url('/public/img/ponta05.png'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.complaint-footer {
+  background-color: #f0f0f0; /* ou um cinza claro para contraste */
+}
+
+
+.complaint-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #007bc1;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.complaint-user a {
+  color: #007bc1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.complaint-user a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.user-icon {
+  font-size: 18px;
+}
+
+
+
+.complaint-main {
+  padding: 30px 40px;
+}
+
+.complaint-timestamp {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #007bc1;
+  margin: 10px 0 20px 0;
+}
+
+.complaint-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px;
+  border: 1px solid #007bc1;
+  border-radius: 4px;
+  resize: none;
+}
+
+.input-multiline {
+  height: 60px;
+}
+
+textarea {
+  height: 100px;
+}
+
+.photo-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complaint-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-end;
+}
+
+.pending-label {
+  background-color: #f5425d;
+  color: white;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.photo-placeholder {
+  height: 120px;
+  background-color: #007bc1;
+  border-radius: 6px;
+}
+
+.complaint-timestamp {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.complaint-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.pending-label {
+  background-color: #f5425d;
+  color: white;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.blue-divider {
+  border: none;
+  border-top: 1px solid #007bc1;
+  margin: 10px 0 20px;
+}
