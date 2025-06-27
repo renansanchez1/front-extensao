@@ -18,7 +18,7 @@ const RecuperarLayout: React.FC<Props> = ({ title, children }) => {
 
       <div className={styles.footerLine} />
       <img
-        src="/img/ponta05.png"
+        src="/img/logo_extensao.png"
         alt="Prefeitura"
         className={styles.footerImage}
       />
