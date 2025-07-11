@@ -1,4 +1,3 @@
-/* Reset básico */
 body, html, div, textarea, input, nav, a {
   margin: 0;
   padding: 0;
@@ -6,7 +5,6 @@ body, html, div, textarea, input, nav, a {
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Container principal */
 .complaint-page {
   display: flex;
   flex-direction: column;
@@ -15,7 +13,6 @@ body, html, div, textarea, input, nav, a {
   border-radius: 4px;
 }
 
-/* ===== Cabeçalho ===== */
 .complaint-header {
   display: flex;
   align-items: center;
@@ -56,7 +53,6 @@ body, html, div, textarea, input, nav, a {
   font-weight: 500;
 }
 
-/* ===== Mapa ===== */
 .complaint-main {
   flex: 1;
   padding: 1rem 2rem;
@@ -75,7 +71,6 @@ body, html, div, textarea, input, nav, a {
   border: 2px solid #007bc1;
 }
 
-/* ===== Rodapé ===== */
 .complaint-footer {
   padding: 1rem;
   text-align: center;
@@ -88,7 +83,7 @@ body, html, div, textarea, input, nav, a {
 }
 
 .footer-logo {
-  background-image: url('/logo-prefeitura.png'); /* ou svg se preferir */
+  background-image: url('/logo-prefeitura.png'); 
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -96,7 +91,6 @@ body, html, div, textarea, input, nav, a {
   margin: 0 auto;
 }
 
-/* Filtro no canto superior direito */
 #filtro {
   padding: 0.3rem;
   border: 1px solid #007bc1;
