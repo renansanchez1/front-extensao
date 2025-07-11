@@ -60,7 +60,7 @@ const MapaReclamacoes: React.FC = () => {
   }, []);
 
   return (
-    <MapContainer center={[-15.78, -47.93]} zoom={5} style={{ height: '100%', width: '100%' }}>
+    <MapContainer center={[-22.5297, -55.7208]} zoom={14} style={{ height: '100%', width: '100%' }}>
       <TileLayer
         attribution='&copy; OpenStreetMap'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
