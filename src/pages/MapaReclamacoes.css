@@ -1,0 +1,115 @@
+.pagina-mapa {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo {
+  background-color: #0088cc;
+  width: 180px;
+  height: 50px;
+  border-radius: 20px;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+  position: relative;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 500;
+  padding-bottom: 5px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu a:hover,
+.menu a.ativo {
+  color: #0088cc;
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: #0088cc;
+  bottom: 0;
+  left: 0;
+  border-radius: 2px;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0088cc;
+  font-weight: bold;
+}
+
+.usuario img {
+  width: 24px;
+  height: 24px;
+}
+
+.conteudo {
+  padding: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filtro {
+  align-self: flex-end;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.filtro label {
+  font-weight: 500;
+}
+
+.filtro select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.mapa-container {
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.rodape {
+  padding: 20px 40px;
+  text-align: center;
+  border-top: 2px solid #0088cc;
+  background-color: #fff;
+}
+
+.rodape img {
+  height: 60px;
+}

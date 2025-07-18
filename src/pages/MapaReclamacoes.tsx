@@ -3,9 +3,11 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import axios from 'axios';
+import './MapaReclamacoes.css';
+
 
 const meuIcone = new L.Icon({
-  iconUrl: '/icons/marcador_icone.webp',
+  iconUrl: '/icons/alerta_icone.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
@@ -21,6 +23,7 @@ type Solicitacao = {
   bairro: string;
   cep: string;
   problema: string;
+  status: string; // novo campo
 };
 
 type Localizacao = {
@@ -31,6 +34,7 @@ type Localizacao = {
 const MapaReclamacoes: React.FC = () => {
   const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>([]);
   const [coordenadas, setCoordenadas] = useState<Record<number, Localizacao>>({});
+  const [filtroStatus, setFiltroStatus] = useState<string>(''); // novo state
 
   useEffect(() => {
     axios.get<Solicitacao[]>('http://localhost:8080/solicitacoes')
@@ -59,6 +63,10 @@ const MapaReclamacoes: React.FC = () => {
       });
   }, []);
 
+  const solicitacoesFiltradas = filtroStatus
+    ? solicitacoes.filter(s => s.status === filtroStatus)
+    : solicitacoes;
+
   return (
     <div className="pagina-mapa">
       <header className="topo">
@@ -69,31 +77,36 @@ const MapaReclamacoes: React.FC = () => {
           <a href="#">Relatórios</a>
         </nav>
         <div className="usuario">
-          <i className="icon-user" /> <a href="#">Sair</a>
+          <img src="/icons/usuario_icone.png" alt="Ícone usuário" />
+          <a href="#">Sair</a>
         </div>
       </header>
 
       <div className="conteudo">
         <div className="filtro">
-          <label htmlFor="filtro">Filtrar por:</label>
-          <select id="filtro">
+          <label htmlFor="filtro">Filtrar por status:</label>
+          <select id="filtro" value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)}>
             <option value="">Todos</option>
-            {/* Insira filtros dinâmicos conforme necessário */}
+            <option value="PENDENTE">Pendente</option>
+            <option value="EM_ANDAMENTO">Em andamento</option>
+            <option value="RESOLVIDO">Resolvido</option>
           </select>
         </div>
 
         <div className="mapa-container">
           <MapContainer center={[-22.5297, -55.7208]} zoom={14} style={{ height: '500px', width: '100%', borderRadius: '16px' }}>
             <TileLayer
-              attribution='&copy; OpenStreetMap'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             />
-            {solicitacoes.map((s) => {
+
+            {solicitacoesFiltradas.map((s) => {
               const coord = coordenadas[s.id];
               return coord ? (
                 <Marker key={s.id} position={coord} icon={meuIcone}>
                   <Popup>
                     <strong>Problema:</strong> {s.problema}<br />
+                    <strong>Status:</strong> {s.status}<br />
                     <strong>Endereço:</strong> {s.rua}, {s.numero}, {s.bairro}
                   </Popup>
                 </Marker>
@@ -104,10 +117,11 @@ const MapaReclamacoes: React.FC = () => {
       </div>
 
       <footer className="rodape">
-        <img src="/logo-prefeitura.png" alt="Prefeitura de Ponta Porã" />
+        <img src="/logo_extensao.png" alt="Prefeitura de Ponta Porã" />
       </footer>
     </div>
   );
 };
+
 
 export default MapaReclamacoes;
