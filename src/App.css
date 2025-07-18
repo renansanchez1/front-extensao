@@ -1,128 +1,65 @@
-body, html, div, textarea, input, nav, a {
+@import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
+html, body, #root {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
 }
 
-.complaint-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  border: 2px solid #007bc1;
-  border-radius: 4px;
+/* Cabeçalho */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.complaint-header {
+/* Menu de navegação */
+nav {
+  background-color: #fff;
+  padding: 0.5rem 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 2rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
+  gap: 1rem;
+  border-bottom: 1px solid #ccc;
 }
 
-.complaint-logo {
-  width: 180px;
-  height: 50px;
-  background-color: #007bc1;
-  border-radius: 20px;
+nav a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.complaint-nav {
-  display: flex;
-  gap: 2rem;
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Filtro */
+.filtro {
+  margin: 1rem 2rem;
   font-size: 1rem;
 }
 
-.complaint-nav a {
-  text-decoration: none;
-  color: #007bc1;
-  font-weight: bold;
-}
-
-.complaint-user {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.complaint-user a {
-  text-decoration: none;
-  color: #007bc1;
-  font-weight: 500;
-}
-
-.complaint-main {
-  flex: 1;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.map-wrapper {
-  width: 100%;
-  max-width: 900px;
-  height: 500px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border: 2px solid #007bc1;
-}
-
-.complaint-footer {
-  padding: 1rem;
-  text-align: center;
-}
-
-.footer-divider {
-  margin: 1rem auto;
-  width: 90%;
-  border-top: 1px solid #ccc;
-}
-
-.footer-logo {
-  background-image: url('/logo-prefeitura.png'); 
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  height: 40px;
-  margin: 0 auto;
-}
-
-#filtro {
+select {
   padding: 0.3rem;
-  border: 1px solid #007bc1;
-  border-radius: 4px;
+  font-size: 1rem;
 }
 
-
-
-nav {
-  background-color: #ffffff;
-  color: #007bc1;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #007bc1;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+/* Mapa ocupa o restante da tela */
+#map {
+  height: calc(100vh - 160px); /* Ajuste conforme o tamanho do header/nav */
+  width: 100%;
 }
 
-nav h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #007bc1;
-}
-
+/* Rodapé */
 footer {
-  background-color: #ffffff;
-  border-top: 2px solid #007bc1;
-  padding: 1rem 2rem;
-  text-align: center;
-  font-weight: 500;
-  color: #007bc1;
-  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.05);
+  background-color: #eee;
+  padding: 0.5rem 2rem;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ccc;
 }
