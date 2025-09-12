@@ -6,7 +6,7 @@ import '../styles/ComplaintDetails.css';
 interface Solicitacao {
   id: number;
   data_inicio: string;
-  data_fim: string;
+  data_fim: string | null;
   detalhes: string;
   status: string;
   tipo_problema: string;
@@ -17,18 +17,35 @@ interface Solicitacao {
   numero: number;
 }
 
+interface Media {
+  id: number;
+  nomeOriginalArquivo: string;
+  nomeArquivoArmazenado: string;
+  tipoConteudo: string;
+  caminhoRelativo: string;
+  urlAcesso: string;  
+}
+
 const ComplaintDetails: React.FC = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
 
   const [solicitacao, setSolicitacao] = useState<Solicitacao | null>(null);
+  const [midias, setMidias] = useState<Media[]>([]);
 
   useEffect(() => {
     if (id) {
+      // Busca a solicitação
       fetch(`http://localhost:8080/solicitacoes/${id}`)
         .then(res => res.json())
         .then(data => setSolicitacao(data))
         .catch(err => console.error('Erro ao buscar solicitação:', err));
+
+      // Busca as mídias vinculadas à solicitação
+      fetch(`http://localhost:8080/api/midias/solicitacao/${id}`)
+        .then(res => res.json())
+        .then(data => setMidias(data))
+        .catch(err => console.error('Erro ao buscar mídias:', err));
     }
   }, [id]);
 
@@ -36,16 +53,40 @@ const ComplaintDetails: React.FC = () => {
 
   const localFormatado = `${solicitacao.rua}, ${solicitacao.numero}\n${solicitacao.bairro}\n${solicitacao.cep}`;
 
+  const formatarData = (data: string | null): string | null => {
+    if (!data) return null;
+    const d = new Date(data);
+    return d.toISOString().split('T')[0]; // Formato: YYYY-MM-DD
+  };
+
   const atualizarStatus = () => {
+    if (!solicitacao) return;
+
+    const solicitacaoDTO = {
+      data_inicio: formatarData(solicitacao.data_inicio),
+      data_fim: solicitacao.data_fim ? formatarData(solicitacao.data_fim) : null,
+      detalhes: solicitacao.detalhes,
+      status: solicitacao.status,
+      tipo_problema: solicitacao.tipo_problema,
+      problema: solicitacao.problema,
+      cep: solicitacao.cep,
+      bairro: solicitacao.bairro,
+      rua: solicitacao.rua,
+      numero: solicitacao.numero,
+    };
+
     fetch(`http://localhost:8080/solicitacoes/${solicitacao.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(solicitacao),
+      body: JSON.stringify(solicitacaoDTO),
     })
-      .then(res => {
-        if (!res.ok) throw new Error('Erro ao atualizar status');
+      .then(async res => {
+        if (!res.ok) {
+          const erro = await res.text();
+          throw new Error(`Erro ao atualizar status: ${erro}`);
+        }
         alert('Status atualizado com sucesso!');
       })
       .catch(err => {
@@ -91,26 +132,91 @@ const ComplaintDetails: React.FC = () => {
 
           <div className="photo-section">
             <div className="complaint-status">
-              <label>Status</label>
-              <select
-                value={solicitacao.status}
-                onChange={(e) =>
-                  setSolicitacao({ ...solicitacao, status: e.target.value })
-                }
-              >
-                <option value="PENDENTE">PENDENTE</option>
-                <option value="EM_ANDAMENTO">EM_ANDAMENTO</option>
-                <option value="CONCLUIDO">CONCLUIDO</option>
-              </select>
+              <div className="status-container">
+                <select
+                  className={`status-select ${solicitacao.status.toLowerCase()}`}
+                  value={solicitacao.status}
+                  onChange={(e) =>
+                    setSolicitacao({ ...solicitacao, status: e.target.value })
+                  }
+                >
+                  <option value="NOVO">NOVO</option>
+                  <option value="PENDENTE">PENDENTE</option>
+                  <option value="CONCLUIDO">CONCLUIDO</option>
+                </select>
 
-              <button onClick={atualizarStatus} style={{ marginTop: '10px' }}>
-                Atualizar status
-              </button>
+                <button className="btn-atualizar" onClick={atualizarStatus}>
+                  Atualizar status
+                </button>
+              </div>
             </div>
 
-            <label>Foto</label>
-            <div className="photo-placeholder" />
-            <div className="photo-placeholder" />
+            <label>Mídias</label>
+            <div
+              className={`media-gallery ${
+                midias.length === 1
+                  ? "one"
+                  : midias.length === 2
+                  ? "two"
+                  : midias.length >= 3
+                  ? "three"
+                  : ""
+              }`}
+            >
+              {midias.length === 0 && <p>Nenhuma mídia anexada.</p>}
+
+              {midias.map((midia) => {
+                const url = midia.urlAcesso;
+
+                if (midia.tipoConteudo.startsWith("image/")) {
+                  return (
+                    <div key={midia.id} style={{ textAlign: "center" }}>
+                      <img
+                        src={url}
+                        alt={midia.nomeOriginalArquivo}
+                        style={{
+                          width: "100%",
+                          height: "200px",
+                          objectFit: "cover",
+                          borderRadius: "8px",
+                          border: "1px solid #ccc",
+                        }}
+                      />
+                      <p style={{ marginTop: "8px" }}>{midia.nomeOriginalArquivo}</p>
+                    </div>
+                  );
+                }
+
+                if (midia.tipoConteudo.startsWith("video/")) {
+                  return (
+                    <div key={midia.id} style={{ textAlign: "center" }}>
+                      <video
+                        controls
+                        style={{
+                          width: "100%",
+                          height: "200px",
+                          borderRadius: "8px",
+                          border: "1px solid #ccc",
+                          objectFit: "cover",
+                        }}
+                      >
+                        <source src={url} type={midia.tipoConteudo} />
+                        Seu navegador não suporta vídeo.
+                      </video>
+                      <p style={{ marginTop: "8px" }}>{midia.nomeOriginalArquivo}</p>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div key={midia.id} style={{ textAlign: "center" }}>
+                    <a href={url} target="_blank" rel="noopener noreferrer">
+                      {midia.nomeOriginalArquivo}
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </main>
