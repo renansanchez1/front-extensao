@@ -212,21 +212,20 @@ textarea {
   cursor: pointer;
   text-transform: uppercase;
   box-shadow: 0px 1px 4px rgba(0,0,0,0.2);
-  appearance: none; /* remove estilo padrão do select */
+  appearance: none; 
 }
 
-/* Cores conforme o valor */
 .status-select.novo {
-  background-color: #28a745; /* verde */
+  background-color: #28a745; 
 }
 
 .status-select.pendente {
-  background-color: #ffc107; /* amarelo */
+  background-color: #ffc107; 
   color: #000;
 }
 
 .status-select.concluido {
-  background-color: #343a40; /* preto */
+  background-color: #343a40; 
 }
 
 
@@ -240,19 +239,19 @@ textarea {
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
-  background-color: #007bff; /* azul padrão */
+  background-color: #007bff;
   color: #fff;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0px 1px 4px rgba(0,0,0,0.2);
 }
 
 .btn-atualizar:hover {
-  background-color: #0056b3; /* azul mais escuro no hover */
+  background-color: #0056b3; 
   transform: translateY(-2px);
 }
 
 .btn-atualizar:active {
-  background-color: #00408d; /* ainda mais escuro ao clicar */
+  background-color: #00408d; 
   transform: translateY(0);
 }
 
