@@ -174,3 +174,20 @@
 .rodape img {
   height: 60px;
 }
+
+
+
+.btn-detalhes {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #0077cc;
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.btn-detalhes:hover {
+  background-color: #005fa3;
+}

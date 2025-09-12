@@ -113,21 +113,30 @@ const MapaReclamacoes: React.FC = () => {
 
         <div className="principal">
           {/* lista req */}
-          <aside className="lista-reclamacoes">
-            <h3>Reclamações</h3>
-            <ul>
-              {solicitacoesFiltradas.map((s) => (
-                <li key={s.id} className="item-reclamacao">
-                  <span className="icone-alerta">⚠️</span>
-                  <div className="info">
-                    <p className="data">{new Date(s.data_inicio).toLocaleString()}</p>
-                    <p><strong>Problema:</strong> {s.tipo_problema}</p>
-                    <p><strong>Status:</strong> {s.status}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </aside>
+        <aside className="lista-reclamacoes">
+          <h3>Reclamações</h3>
+          <ul>
+            {solicitacoesFiltradas.map((s) => (
+              <li key={s.id} className="item-reclamacao">
+                <span className="icone-alerta">⚠️</span>
+                <div className="info">
+                  <p className="data">{new Date(s.data_inicio).toLocaleString()}</p>
+                  <p><strong>Problema:</strong> {s.tipo_problema}</p>
+                  <p><strong>Status:</strong> {s.status}</p>
+
+                  {/* botão de detalhes */}
+                  <a
+                    href={`/reclamacao?id=${s.id}`}
+                    className="btn-detalhes"
+                  >
+                    Ver detalhes
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
 
           {/* mapa */}
           <div className="mapa-container">
