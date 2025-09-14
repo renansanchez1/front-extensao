@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/Cadastro.css'; // importa o css específico
+import '../styles/Cadastro.css'; 
 
 const Cadastro: React.FC = () => {
   const [usuario, setUsuario] = useState({
