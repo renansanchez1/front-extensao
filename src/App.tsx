@@ -2,6 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecuperarSenha from './pages/RecuperarSenha';
 import ComplaintDetails from './pages/ComplaintDetails';
+import MapaReclamacoes from './pages/MapaReclamacoes.tsx';
+import Relatorio from './pages/Relatorio';
+
+
 
 function App() {
   return (
@@ -10,6 +14,8 @@ function App() {
         <Routes>
           <Route path="/recuperar-senha" element={<RecuperarSenha />} />
           <Route path="/reclamacao" element={<ComplaintDetails />} />
+          <Route path="/mapa-reclamacao" element={<MapaReclamacoes  />} />
+          <Route path="/relatorio" element={<Relatorio  />} />
         </Routes>
       </Router>
     </div>

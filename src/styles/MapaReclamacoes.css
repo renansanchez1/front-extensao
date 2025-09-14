@@ -1,0 +1,193 @@
+.pagina-mapa {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo {
+  background-color: #0088cc;
+  width: 180px;
+  height: 50px;
+  border-radius: 20px;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+  position: relative;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 500;
+  padding-bottom: 5px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu a:hover,
+.menu a.ativo {
+  color: #0088cc;
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: #0088cc;
+  bottom: 0;
+  left: 0;
+  border-radius: 2px;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0088cc;
+  font-weight: bold;
+}
+
+.usuario img {
+  width: 24px;
+  height: 24px;
+}
+
+.conteudo {
+  padding: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.filtro {
+  align-self: flex-end;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.filtro label {
+  font-weight: 500;
+}
+
+.filtro select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.principal {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lista-reclamacoes {
+  width: 280px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow-y: auto;
+  max-height: 520px;
+}
+
+.lista-reclamacoes h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #0088cc;
+}
+
+.lista-reclamacoes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-reclamacao {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.item-reclamacao:last-child {
+  border-bottom: none;
+}
+
+.icone-alerta {
+  font-size: 20px;
+  color: #ff9800;
+}
+
+.item-reclamacao .info {
+  font-size: 0.85rem;
+}
+
+.item-reclamacao .info p {
+  margin: 2px 0;
+}
+
+.item-reclamacao .info .data {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.mapa-container {
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.rodape {
+  padding: 20px 40px;
+  text-align: center;
+  border-top: 2px solid #0088cc;
+  background-color: #fff;
+}
+
+.rodape img {
+  height: 60px;
+}
+
+
+
+.btn-detalhes {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #0077cc;
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.btn-detalhes:hover {
+  background-color: #005fa3;
+}

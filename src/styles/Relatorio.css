@@ -1,0 +1,168 @@
+.pagina-relatorios {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.logo {
+  width: 160px;
+  height: 50px;
+  background-color: #0077cc; 
+  border-radius: 20px;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+}
+
+.menu a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 6px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c757d;              
+  transition: color .2s ease;
+}
+
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;                
+  width: 100%;
+  height: 3px;
+  background: #0077cc;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+
+.menu a:hover {
+  color: #0077cc;
+}
+.menu a:hover::after {
+  transform: scaleX(1);
+}
+
+.menu a.ativo {
+  color: #0077cc;
+}
+.menu a.ativo::after {
+  transform: scaleX(1);
+}
+
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.usuario img {
+  width: 28px;
+  height: 28px;
+}
+
+.usuario a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: 500;
+}
+
+.conteudo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.filtros {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.filtros label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.filtros input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-relatorio {
+  background-color: #28a745; 
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-relatorio:hover {
+  background-color: #218838;
+}
+
+.btn-pdf {
+  background-color: #f9b233; 
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-pdf:hover {
+  background-color: #e0a020;
+}
+
+.grafico {
+  text-align: center;
+  margin-top: 40px;
+  width: 80%;   
+  max-width: 1000px;
+}
+
+.grafico h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.rodape {
+  border-top: 3px solid #0077cc;
+  margin: 0 auto;
+  width: 80%;   
+  text-align: center;
+  padding: 15px 0;
+}
+
+.rodape img {
+  height: 45px;
+}
