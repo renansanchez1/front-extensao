@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RecuperarLayout from '../components/RecuperarLayout';
+import Footer from '../components/Footer';
 import styles from '../styles/RecuperarSenha.module.css';
-
 
 const RecuperarSenha: React.FC = () => {
   const [form, setForm] = useState({
@@ -24,7 +24,7 @@ const RecuperarSenha: React.FC = () => {
   return (
     <RecuperarLayout title="Recuperar Senha">
       <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
+        <div className={styles.formGroup}>
           <label>Informe o seu Registro Administrativo</label>
           <input
             className={styles.input}
@@ -76,6 +76,8 @@ const RecuperarSenha: React.FC = () => {
           RECUPERAR SENHA
         </button>
       </form>
+
+
     </RecuperarLayout>
   );
 };

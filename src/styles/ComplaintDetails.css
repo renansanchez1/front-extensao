@@ -1,76 +1,10 @@
 .complaint-page {
+  font-family: 'Segoe UI', sans-serif; 
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  font-family: sans-serif;
-}
-
-.complaint-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 40px;
-  background-color: white;
-}
-
-.complaint-logo {
-  width: 280px;
-  height: 70px;
-  background-color: #007bc1;
-  border-radius: 25px;
-}
-
-.complaint-nav a {
-  position: relative;
-  margin: 0 15px;
-  color: #007bc1;
-  text-decoration: none;
-  padding-bottom: 4px;
-  transition: color 0.3s ease;
-}
-
-.complaint-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: #007bc1;
-  transition: width 0.3s ease;
-}
-
-.complaint-nav a:hover {
-  color: #005c91; 
-}
-
-.complaint-nav a:hover::after {
-  width: 100%;
-}
-
-
-.complaint-user {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #007bc1;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.complaint-user a {
-  color: #007bc1;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.complaint-user a:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.user-icon {
-  font-size: 18px;
+  min-height: 100vh; 
+  background-color: #fff;
+  color: #333;
 }
 
 .complaint-main {
@@ -78,28 +12,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1; 
 }
 
 .complaint-timestamp {
   font-weight: bold;
   margin-bottom: 10px;
   color: #000;
-}
-
-.complaint-status {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  align-self: flex-end;
-  margin-bottom: 10px;
-}
-
-.pending-label {
-  background-color: #f5425d;
-  color: white;
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 5px;
 }
 
 .complaint-grid {
@@ -132,9 +51,9 @@ textarea {
   font-size: 14px;
 }
 
-.input-multiline {
-  height: 60px;
-  font-family: inherit;
+.input-local.textarea-local {
+  height: 80px;
+  resize: none;
   white-space: pre-line;
 }
 
@@ -149,58 +68,13 @@ textarea {
   gap: 10px;
 }
 
-.photo-placeholder {
-  height: 180px;
-  background-color: #007bc1;
-  border-radius: 6px;
+.complaint-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-end;
+  margin-bottom: 10px;
 }
-
-
-.footer-divider {
-  all: unset;
-  display: block;
-  border-top: 2px solid #007bc1;
-  width: 70%;
-  margin: 0 auto 20px auto;
-}
-
-.complaint-footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 20px;
-}
-
-.footer-logo {
-  margin-top: 10px;
-  background-image: url('/public/img/logo_extensao.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 180px;
-  height: 60px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-
-.section-divider {
-  all: unset;
-  display: block;
-  border-top: 2px solid #007bc1;
-  width: 70%;
-  margin: 0 auto 20px auto;
-}
-
-
-
-.input-local.textarea-local {
-  height: 80px;
-  resize: none;
-  white-space: pre-line;
-}
-
-
-
 
 .status-select {
   padding: 6px 14px;
@@ -228,8 +102,6 @@ textarea {
   background-color: #343a40; 
 }
 
-
-
 .btn-atualizar {
   margin-top: 10px;
   margin-left: 5px;
@@ -254,8 +126,6 @@ textarea {
   background-color: #00408d; 
   transform: translateY(0);
 }
-
-
 
 .media-gallery {
   display: grid;

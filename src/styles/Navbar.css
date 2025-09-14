@@ -1,0 +1,59 @@
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo {
+  width: 180px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #fff; 
+}
+
+
+.menu {
+  display: flex;
+  gap: 30px;
+  position: relative;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 500;
+  padding-bottom: 5px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu a:hover,
+.menu a.ativo {
+  color: #0088cc;
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: #0088cc;
+  bottom: 0;
+  left: 0;
+  border-radius: 2px;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0088cc;
+  font-weight: bold;
+}
+
+.usuario img {
+  width: 24px;
+  height: 24px;
+}

@@ -1,8 +1,11 @@
+// src/pages/Relatorios.tsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import jsPDF from 'jspdf';
 import '../styles/Relatorio.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 type Solicitacao = {
   id: number;
@@ -29,13 +32,11 @@ const Relatorios: React.FC = () => {
     const inicio = new Date(dataInicio);
     const fim = new Date(dataFim);
 
-    // filtra pelo período
     const filtradas = solicitacoes.filter(s => {
       const data = new Date(s.data_inicio);
       return data >= inicio && data <= fim;
     });
 
-    // agrupa por mês
     const agrupado: Record<string, number> = {};
     filtradas.forEach(s => {
       const d = new Date(s.data_inicio);
@@ -62,18 +63,7 @@ const Relatorios: React.FC = () => {
 
   return (
     <div className="pagina-relatorios">
-      <header className="topo">
-        <div className="logo"></div>
-        <nav className="menu">
-          <a href="#">Mapa</a>
-          <a href="#">Reclamações</a>
-          <a href="#" className="ativo">Relatórios</a>
-        </nav>
-        <div className="usuario">
-          <img src="/icons/usuario_icone.png" alt="Ícone usuário" />
-          <a href="#">Sair</a>
-        </div>
-      </header>
+      <Navbar />
 
       <div className="conteudo">
         <div className="filtros">
@@ -98,9 +88,7 @@ const Relatorios: React.FC = () => {
         </div>
       </div>
 
-      <footer className="rodape">
-        <img src="/logo_extensao.png" alt="Prefeitura de Ponta Porã" />
-      </footer>
+      <Footer />
     </div>
   );
 };

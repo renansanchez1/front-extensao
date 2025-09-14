@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import '../styles/ComplaintDetails.css';
 
 interface Solicitacao {
@@ -56,7 +58,7 @@ const ComplaintDetails: React.FC = () => {
   const formatarData = (data: string | null): string | null => {
     if (!data) return null;
     const d = new Date(data);
-    return d.toISOString().split('T')[0]; // Formato: YYYY-MM-DD
+    return d.toISOString().split('T')[0];
   };
 
   const atualizarStatus = () => {
@@ -97,18 +99,7 @@ const ComplaintDetails: React.FC = () => {
 
   return (
     <div className="complaint-page">
-      <header className="complaint-header">
-        <div className="complaint-logo" />
-        <nav className="complaint-nav">
-          <a href="#">Mapa</a>
-          <a href="#">Reclamações</a>
-          <a href="#">Relatórios</a>
-        </nav>
-        <div className="complaint-user">
-          <FaUser size={22} color="#007bc1" />
-          <a href="#">Sair</a>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="complaint-main">
         <hr className="section-divider" />
@@ -221,10 +212,7 @@ const ComplaintDetails: React.FC = () => {
         </div>
       </main>
 
-      <footer className="complaint-footer">
-        <hr className="footer-divider" />
-        <div className="footer-logo" />
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -4,15 +4,18 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import axios from 'axios';
 import '../styles/MapaReclamacoes.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import AlertaIcone from '../assets/alerta_icone.png';
 
 const meuIcone = new L.Icon({
-  iconUrl: '/icons/alerta_icone.png',
+  iconUrl: AlertaIcone, 
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
   shadowSize: [41, 41],
-  shadowAnchor: [13, 41]
+  shadowAnchor: [13, 41],
 });
 
 type MediaResponseDTO = {
@@ -53,10 +56,10 @@ const MapaReclamacoes: React.FC = () => {
         setSolicitacoes(res.data);
 
         const promises = res.data.map(async (s) => {
-        const endereco = `${s.rua}, ${s.numero}, ${s.bairro}, ${s.cep}`;
+          const endereco = `${s.rua}, ${s.numero}, ${s.bairro}, ${s.cep}`;
           try {
             const geo = await axios.get('https://nominatim.openstreetmap.org/search', {
-              params: { q: endereco, format: 'json' }
+              params: { q: endereco, format: 'json' },
             });
             if (geo.data.length > 0) {
               const { lat, lon } = geo.data[0];
@@ -87,58 +90,40 @@ const MapaReclamacoes: React.FC = () => {
 
   return (
     <div className="pagina-mapa">
-      <header className="topo">
-        <div className="logo"></div>
-        <nav className="menu">
-          <a href="#" className="ativo">Mapa</a>
-          <a href="#">Reclamações</a>
-          <a href="#">Relatórios</a>
-        </nav>
-        <div className="usuario">
-          <img src="/icons/usuario_icone.png" alt="Ícone usuário" />
-          <a href="#">Sair</a>
-        </div>
-      </header>
+      <Navbar />
 
       <div className="conteudo">
         <div className="filtro">
           <label htmlFor="filtro">Filtrar por status:</label>
           <select id="filtro" value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)}>
             <option value="">Todos</option>
-            <option value="PENDENTE">Pendente</option>
+            <option value="ABERTO">ABERTO</option> case sensitive
             <option value="EM_ANDAMENTO">Em andamento</option>
             <option value="RESOLVIDO">Resolvido</option>
           </select>
         </div>
 
         <div className="principal">
-          {/* lista req */}
-        <aside className="lista-reclamacoes">
-          <h3>Reclamações</h3>
-          <ul>
-            {solicitacoesFiltradas.map((s) => (
-              <li key={s.id} className="item-reclamacao">
-                <span className="icone-alerta">⚠️</span>
-                <div className="info">
-                  <p className="data">{new Date(s.data_inicio).toLocaleString()}</p>
-                  <p><strong>Problema:</strong> {s.tipo_problema}</p>
-                  <p><strong>Status:</strong> {s.status}</p>
+          <aside className="lista-reclamacoes">
+            <h3>Reclamações</h3>
+            <ul>
+              {solicitacoesFiltradas.map((s) => (
+                <li key={s.id} className="item-reclamacao">
+                  <span className="icone-alerta">⚠️</span>
+                  <div className="info">
+                    <p className="data">{new Date(s.data_inicio).toLocaleString()}</p>
+                    <p><strong>Problema:</strong> {s.tipo_problema}</p>
+                    <p><strong>Status:</strong> {s.status}</p>
 
-                  {/* botão de detalhes */}
-                  <a
-                    href={`/reclamacao?id=${s.id}`}
-                    className="btn-detalhes"
-                  >
-                    Ver detalhes
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </aside>
+                    <a href={`/reclamacao?id=${s.id}`} className="btn-detalhes">
+                      Ver detalhes
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </aside>
 
-
-          {/* mapa */}
           <div className="mapa-container">
             <MapContainer
               center={[-22.5297, -55.7208]}
@@ -167,9 +152,7 @@ const MapaReclamacoes: React.FC = () => {
         </div>
       </div>
 
-      <footer className="rodape">
-        <img src="/logo_extensao.png" alt="Prefeitura de Ponta Porã" />
-      </footer>
+      <Footer />
     </div>
   );
 };
