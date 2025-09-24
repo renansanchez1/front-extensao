@@ -129,7 +129,7 @@ const Cadastro: React.FC = () => {
         </form>
 
         <div className="links">
-          <Link to="/login">Realizar login</Link>
+          <Link to="/">Realizar login</Link>
           <Link to="/recuperar-senha">Recuperar a senha</Link>
         </div>
 

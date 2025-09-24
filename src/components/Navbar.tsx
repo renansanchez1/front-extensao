@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
       </nav>
       <div className="usuario">
         <img src={UserIcon} alt="Prefeitura de Ponta Porã" />
-        <a href="#">Sair</a>
+        <a href="/">Sair</a>
       </div>
     </header>
   );

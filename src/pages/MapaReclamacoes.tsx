@@ -48,6 +48,7 @@ const MapaReclamacoes: React.FC = () => {
   const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>([]);
   const [coordenadas, setCoordenadas] = useState<Record<number, Localizacao>>({});
   const [filtroStatus, setFiltroStatus] = useState<string>('');
+  const [filtroCategoria, setFiltroCategoria] = useState<string>('');
 
   useEffect(() => {
     const carregarSolicitacoes = async () => {
@@ -84,9 +85,12 @@ const MapaReclamacoes: React.FC = () => {
     carregarSolicitacoes();
   }, []);
 
-  const solicitacoesFiltradas = filtroStatus
-    ? solicitacoes.filter(s => s.status === filtroStatus)
-    : solicitacoes;
+ const solicitacoesFiltradas = solicitacoes.filter(s => {
+  const statusOk = filtroStatus ? s.status === filtroStatus : true;
+  const categoriaOk = filtroCategoria ? s.tipo_problema === filtroCategoria : true;
+  return statusOk && categoriaOk;
+});
+
 
   return (
     <div className="pagina-mapa">
@@ -97,9 +101,18 @@ const MapaReclamacoes: React.FC = () => {
           <label htmlFor="filtro">Filtrar por status:</label>
           <select id="filtro" value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)}>
             <option value="">Todos</option>
-            <option value="ABERTO">ABERTO</option> case sensitive
+            <option value="Aberto">Aberto</option> 
             <option value="EM_ANDAMENTO">Em andamento</option>
             <option value="RESOLVIDO">Resolvido</option>
+          </select>
+        </div>
+        <div className="filtro">
+          <label htmlFor="filtro">Filtrar por categoria:</label>
+          <select id="filtro" value={filtroCategoria} onChange={(e) => setFiltroCategoria(e.target.value)}>
+            <option value="">n/da</option>
+            <option value="Esgoto">Esgoto</option>
+            <option value="Rua">Rua</option>
+            <option value="Iluminação">Iluminação</option>
           </select>
         </div>
 
