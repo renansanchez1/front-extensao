@@ -5,6 +5,7 @@ import jsPDF from 'jspdf';
 import '../styles/Relatorio.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import html2canvas from 'html2canvas';
 
 type Solicitacao = {
   id: number;
@@ -51,12 +52,44 @@ const Relatorios: React.FC = () => {
     setDados(dadosGrafico);
   };
 
-  const downloadPDF = () => {
-    const doc = new jsPDF();
+  const downloadPDF = async () => {
+    const doc = new jsPDF('p', 'mm', 'a4');
+
+    doc.setFontSize(18);
     doc.text("Relatório de Reclamações", 20, 20);
-    dados.forEach((item, i) => {
-      doc.text(`${item.label}: ${item.quantidade}`, 20, 40 + i * 10);
-    });
+
+    doc.setFontSize(12);
+    doc.text(`Período: ${dataInicio} até ${dataFim}`, 20, 35);
+    doc.text(`Data de geração: ${new Date().toLocaleDateString()}`, 20, 45);
+
+    const grafico = document.getElementById("grafico-relatorio");
+    if (grafico) {
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      const canvas = await html2canvas(grafico, {
+        scale: 2, 
+        useCORS: true,
+        backgroundColor: "#ffffff"
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+
+      const imgWidth = 180;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      doc.addImage(imgData, "PNG", 15, 60, imgWidth, imgHeight);
+
+      let yPosition = 60 + imgHeight + 20;
+      doc.setFontSize(14);
+      doc.text("Quantidade de Reclamações por mês:", 20, yPosition);
+      yPosition += 10;
+
+      dados.forEach((item) => {
+        doc.text(`${item.label}: ${item.quantidade}`, 30, yPosition);
+        yPosition += 8;
+      });
+    }
+
     doc.save("relatorio.pdf");
   };
 
@@ -71,10 +104,10 @@ const Relatorios: React.FC = () => {
           <label>Data Fim:</label>
           <input type="date" value={dataFim} onChange={(e) => setDataFim(e.target.value)} />
           <button onClick={gerarRelatorio} className="btn-relatorio">GERAR RELATÓRIO</button>
-          <button onClick={downloadPDF} className="btn-pdf">DOWNLOAD PDF</button>
+          <button onClick={downloadPDF} className="btn-pdf" disabled={dados.length === 0}>DOWNLOAD PDF</button>
         </div>
 
-        <div className="grafico">
+        <div className="grafico" id="grafico-relatorio">
           <h3>Quantidade de Reclamações</h3>
           <LineChart width={1000} height={600} data={dados}>
             <CartesianGrid strokeDasharray="3 3" />
