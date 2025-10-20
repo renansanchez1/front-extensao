@@ -99,3 +99,32 @@
   border-radius: 8px;
   text-align: center;
 }
+
+
+.filtros-modernos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; 
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.filtro-duplo {
+  display: flex;
+  gap: 12px;
+}
+
+.filtro-duplo .filtro-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.botoes-filtros {
+  display: flex;
+  gap: 10px;
+}
+
+.botoes-filtros button {
+  height: 36px;
+}
