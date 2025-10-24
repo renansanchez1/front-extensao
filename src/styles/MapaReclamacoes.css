@@ -1,6 +1,5 @@
 .pagina-mapa {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #fff;
   color: #333;
   min-height: 100vh;
   display: flex;
@@ -110,7 +109,6 @@
   padding: 20px 40px;
   text-align: center;
   border-top: 2px solid #0088cc;
-  background-color: #fff;
 }
 
 .rodape img {
@@ -133,3 +131,4 @@
 .btn-detalhes:hover {
   background-color: #005fa3;
 }
+
