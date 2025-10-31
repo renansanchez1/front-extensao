@@ -1,11 +1,18 @@
+// src/components/Navbar.tsx (VERSÃO ATUALIZADA)
+
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css"; 
 import UserIcon from '../assets/usuario_icone.png';
 
-
 const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Limpa o token de autenticação
+    navigate('/'); // Redireciona para a página de login
+  };
 
   return (
     <header className="topo">
@@ -22,8 +29,12 @@ const Navbar: React.FC = () => {
         </Link>
       </nav>
       <div className="usuario">
-        <img src={UserIcon} alt="Prefeitura de Ponta Porã" />
-        <a href="#">Sair</a>
+        {/* Link para a página Meus Dados */}
+        <Link to="/meus-dados">
+          <img src={UserIcon} alt="Meus Dados" />
+        </Link>
+        {/* Botão de Sair com a lógica de logout */}
+        <a href="#" onClick={handleLogout}>Sair</a>
       </div>
     </header>
   );

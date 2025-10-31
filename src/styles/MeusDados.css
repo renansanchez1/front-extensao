@@ -1,0 +1,165 @@
+/* src/styles/MeusDados.css (VERSÃO ATUALIZADA) */
+
+/* Importação da fonte - pode ser removida se o projeto já usa Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Estilos do conteúdo principal e do formulário */
+.main-content {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    padding-bottom: 50px; /* Adiciona espaço antes do rodapé */
+    font-family: 'Roboto', sans-serif;
+    background-color: #f6f6f6;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+.form-title {
+    text-align: center;
+    color: #555;
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.data-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.form-group label {
+    flex: 1;
+    font-size: 1em;
+    color: #4a4a4a;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.form-group input {
+    flex: 2.5;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+}
+
+.form-group input[disabled] {
+    background-color: #f9fafb;
+    cursor: not-allowed;
+}
+
+.form-group input:not([disabled]) {
+    background-color: #ffffff;
+    cursor: auto;
+}
+
+.form-group input::placeholder {
+    color: #999;
+}
+
+.edit-button {
+    background-color: #63b342;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1em;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 25px;
+    width: 250px;
+    align-self: center;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+    background-color: #5aa63c;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.save-button, .cancel-button {
+    font-weight: 700;
+    font-size: 1.1em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 150px;
+}
+
+.save-button {
+    background-color: #63b342;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #5aa63c;
+}
+
+.cancel-button {
+    background-color: #ef4444;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #dc2626;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: #555;
+    height: 100vh;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+    .form-group label {
+        text-align: left;
+    }
+    .button-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .save-button, .cancel-button {
+        width: 100%;
+    }
+}

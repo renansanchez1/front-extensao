@@ -1,5 +1,7 @@
+// src/pages/Cadastro.tsx (VERSÃO CORRIGIDA)
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Importe useNavigate
 import axios from 'axios';
 import '../styles/Cadastro.css'; 
 
@@ -8,12 +10,13 @@ const Cadastro: React.FC = () => {
     nome: '',
     cpf: '',
     email: '',
-    login: '',
+    login: '', // O campo login não parece ser usado no backend, mas mantemos no form
     password: '',
     confirmarSenha: '',
   });
 
   const [mensagem, setMensagem] = useState<string | null>(null);
+  const navigate = useNavigate(); // Hook para navegação
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsuario({ ...usuario, [e.target.name]: e.target.value });
@@ -21,15 +24,30 @@ const Cadastro: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setMensagem(null); // Limpa a mensagem anterior
 
     if (usuario.password !== usuario.confirmarSenha) {
       setMensagem('As senhas não coincidem.');
       return;
     }
 
+    // *** A CORREÇÃO ESTÁ AQUI ***
+    // Criamos um objeto apenas com os dados que o backend espera
+    // e com os nomes de campos corretos (nome -> name).
+    const dadosParaEnviar = {
+      name: usuario.nome,
+      cpf: usuario.cpf,
+      email: usuario.email,
+      password: usuario.password
+    };
+
     try {
-      await axios.post('/usuario/salvar', usuario);
-      setMensagem('Cadastro realizado com sucesso!');
+      // Usando a URL correta para o registro
+      await axios.post('http://localhost:8080/register', dadosParaEnviar);
+      
+      setMensagem('Cadastro realizado com sucesso! Redirecionando para o login...');
+      
+      // Limpa o formulário após o sucesso
       setUsuario({
         nome: '',
         cpf: '',
@@ -38,8 +56,19 @@ const Cadastro: React.FC = () => {
         password: '',
         confirmarSenha: '',
       });
+
+      // Aguarda 2 segundos e redireciona o usuário para a página de login
+      setTimeout(() => {
+        navigate('/'); 
+      }, 2000);
+
     } catch (error) {
-      setMensagem('Erro ao realizar o cadastro. Verifique os dados.');
+      // Exibe uma mensagem de erro mais útil
+      if (axios.isAxiosError(error) && error.response) {
+        setMensagem(`Erro: ${error.response.data.message || 'Verifique os dados informados.'}`);
+      } else {
+        setMensagem('Erro ao realizar o cadastro. Tente novamente.');
+      }
     }
   };
 
@@ -48,7 +77,12 @@ const Cadastro: React.FC = () => {
       <div className="cadastro-box">
         <h2>Faça o seu cadastro</h2>
 
-        {mensagem && <div className="alert">{mensagem}</div>}
+        {/* Mensagem de sucesso ou erro */}
+        {mensagem && (
+          <div className={`alert ${mensagem.includes('sucesso') ? 'alert-success' : 'alert-error'}`}>
+            {mensagem}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -92,10 +126,9 @@ const Cadastro: React.FC = () => {
               className="form-control"
               type="text"
               name="login"
-              placeholder="Login"
+              placeholder="Login (opcional)"
               value={usuario.login}
               onChange={handleChange}
-              required
             />
           </div>
 
@@ -129,7 +162,7 @@ const Cadastro: React.FC = () => {
         </form>
 
         <div className="links">
-          <Link to="/login">Realizar login</Link>
+          <Link to="/">Realizar login</Link>
           <Link to="/recuperar-senha">Recuperar a senha</Link>
         </div>
 

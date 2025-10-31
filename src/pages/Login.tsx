@@ -1,15 +1,18 @@
+// src/pages/Login.tsx
+
 import React, { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 interface LoginForm {
-  email: string;
+  cpf: string;
   password: string;
 }
 
 const Login: React.FC = () => {
-  const [form, setForm] = useState<LoginForm>({ email: '', password: '' });
+  const [form, setForm] = useState<LoginForm>({ cpf: '', password: '' });
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -18,28 +21,41 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('Login enviado:', form);
-
+    
     try {
       const response = await fetch('http://localhost:8080/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
 
       if (response.ok) {
-        const data = await response.text();
-        console.log('Resposta do backend:', data);
-        alert('Login feito com sucesso!');
+        const responseText = await response.text();
+        let token: string | null = null;
+
+        try {
+          const data = JSON.parse(responseText);
+          if (data && data.token) {
+            token = data.token;
+          }
+        } catch (jsonError) {
+          token = responseText;
+        }
+
+        if (token) {
+          localStorage.setItem('token', token);
+          alert('Login feito com sucesso!');
+          navigate('/mapa-reclamacao');
+        } else {
+          alert('Login falhou: Resposta inesperada do servidor.');
+        }
+
       } else {
         const errorMsg = await response.text();
         alert('Login falhou: ' + errorMsg);
       }
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
-      alert('Erro ao conectar com o servidor');
+      alert('Erro ao conectar com o servidor.');
     }
   };
 
@@ -53,10 +69,10 @@ const Login: React.FC = () => {
             <input
               className="form-control"
               type="text"
-              id="email"
-              name="email"
-              placeholder="Seu e-mail"
-              value={form.email}
+              id="cpf"
+              name="cpf"
+              placeholder="Seu CPF ou Registro"
+              value={form.cpf}
               onChange={handleChange}
               required
             />
@@ -81,7 +97,6 @@ const Login: React.FC = () => {
           </div>
 
           <input className="btn btn-primary" type="submit" value="Entrar" />
-
           <div className="divisao"></div>
         </form>
 
