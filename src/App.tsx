@@ -7,6 +7,7 @@ import Relatorio from './pages/Relatorio';
 import Cadastro from './pages/Cadastro.tsx';
 import Login from './pages/Login.tsx';
 
+
 function App() {
   return (
     <div style={{ all: 'initial' }}>
